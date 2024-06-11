@@ -10,12 +10,23 @@ import employerRouter from "./routers/employerRouter.js";
 import jobSeekerRouter from "./routers/jobSeekerRouter.js"; 
 import applicationRouter from "./routers/applicationRouter.js"
 import { errorMiddleware } from "./middlewares/Error.js";
-import {dbConnection} from "./database/dbConnection.js"
+// import {dbConnection} from "./database/dbConnection.js"
+import mongoose from "mongoose";
 // dotenv.config({path : "./config/config.env"});
 // FRONTEND_URL = "http://localhost:5173/"
 
+
+  mongoose
+    .connect("mongodb+srv://programmingwithkhizi:MvNwxdxguWXhEG1F@jobseeking.auehmic.mongodb.net/")
+    .then(() => {
+      console.log("Connected to database.");
+    })
+    .catch((err) => {
+      console.log(`Some Error occured. ${err}`);
+    });
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://care-seeker-api.vercel.app/',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
@@ -40,7 +51,7 @@ app.use("/api/v1/employer", employerRouter);
 app.use("/api/v1/jobseeker", jobSeekerRouter); 
 
 
-dbConnection()
+// dbConnection()
 app.use(errorMiddleware)
 
 export default app;
