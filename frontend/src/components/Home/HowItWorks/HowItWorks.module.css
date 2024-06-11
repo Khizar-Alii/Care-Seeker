@@ -1,0 +1,61 @@
+.howItWorks {
+  padding: 50px 20px;
+}
+
+.howItWorks h2 {
+  font-size: 25x;
+  font-weight: 500 !important;
+  margin-bottom: 40px;
+}
+
+.howItWorksContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.step {
+  width: 30%;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  h3 {
+    font-size: 22px;
+    padding: 10px 0;
+    letter-spacing: 1px;
+    font-weight: 700;
+  }
+  p {
+    font-size: 16px;
+    letter-spacing: 1px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+}
+
+.step:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.step i {
+  font-size: 3em;
+  color: #61dafb;
+}
+@media screen and (max-width:800px) {
+  .howItWorksContainer{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .step {
+    width: 80%;
+  }
+}
+@media screen and (max-width:400px) { 
+  .step {
+    width: 96%;
+  }
+}

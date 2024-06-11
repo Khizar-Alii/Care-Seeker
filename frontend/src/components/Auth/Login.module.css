@@ -1,0 +1,227 @@
+/* Register a user and login a user */
+
+.authPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+  width: 100%;
+  height: 100vh;
+  padding: 20px;
+}
+
+.authPage .container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  padding: 20px 20px;
+  width: 450px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.authPage .container .header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.authPage .container .header h1 {
+  font-size: 2rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+.authPage .container .header h3 {
+  font-weight: 300;
+  font-size: 1.2rem;
+}
+
+.authPage .container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.authPage .container form .inputTag {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.authPage .container form .inputTag label {
+  font-size: 16px;
+}
+
+.authPage .container form .inputTag div {
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  background: #f0f0f0;
+  padding: 8px;
+  width: 100%;
+}
+
+.authPage .container form .inputTag div input,
+.authPage .container form .inputTag div select {
+  background: transparent;
+  padding: 8px;
+  border: none;
+  width: 100%;
+  height: 100%;
+}
+
+.authPage .container form .inputTag div input:focus,
+.authPage .container form .inputTag div select:focus {
+  outline: none;
+}
+
+.authPage .container form .inputTag div svg {
+  width: 15%;
+  font-size: 1.5rem;
+  color: #2d5649;
+  margin-right: 8px;
+}
+
+.authPage .container form button {
+  padding: 12px;
+  text-align: center;
+  border: none;
+  margin-top: 25px;
+  font-weight: 700;
+  color: #fff;
+  background: #2d5649;
+  font-size: 1.2rem;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.authPage .container form button:hover {
+  background: #24483c;
+}
+
+.authPage .container form .registerLinks {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 25px;
+  width: 100%;
+}
+
+.authPage .container form .registerLinks a {
+  flex: 1;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid #2d5649;
+  font-weight: 700;
+  color: #2d5649;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 7px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.authPage .container form .registerLinks a:hover {
+  background: #2d5649;
+  color: #fff;
+}
+.goToRegBtn {
+  color: black;
+  letter-spacing: 1px;
+  font-weight: 300;
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+}
+
+
+/* Media Queries */
+@media (max-width: 1300px) {
+  .authPage .container {
+    width: 50%;
+  }
+
+  .authPage .container .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .authPage .container .header h3 {
+    font-size: 1rem;
+  }
+
+  .authPage .container form .inputTag label {
+    font-size: 14px;
+  }
+
+  .authPage .container form button,
+  .authPage .container form .registerLinks a {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .authPage .container {
+    width: 80%;
+    padding: 20px;
+  }
+
+  .authPage .container .header h1 {
+    font-size: 1.5rem;
+  }
+
+  .authPage .container .header h3 {
+    font-size: 1rem;
+  }
+
+  .authPage .container form .inputTag label {
+    font-size: 14px;
+  }
+
+  .authPage .container form button,
+  .authPage .container form .registerLinks a {
+    font-size: 1rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .authPage .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .authPage .container .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .authPage .container .header h3 {
+    font-size: 0.9rem;
+  }
+
+  .authPage .container form .inputTag label {
+    font-size: 12px;
+  }
+
+  .authPage .container form button,
+  .authPage .container form .registerLinks a {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+
+  .authPage .container form .registerLinks {
+    flex-direction: column;
+  }
+
+  .authPage .container form .registerLinks a {
+    width: 100%;
+    margin-top: 10px;
+  }
+}

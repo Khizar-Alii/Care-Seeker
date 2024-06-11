@@ -1,0 +1,73 @@
+.services {
+  background-color: #f4f4f4;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.services h2 {
+  font-size: 2.5em;
+  margin-bottom: 40px;
+}
+
+.service-card {
+  height: 250px;
+  background: white;
+  padding: 20px 20px;
+  margin: 0 20px;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.service-card:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.service-card i {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 1em;
+}
+.slick-slide {
+  padding: 0 10px !important;
+}
+
+.slick-list {
+  margin: 0 -15px !important;
+}
+
+.slick-prev,
+.slick-next {
+  z-index: 2;
+  width: 20px;
+  height: 20px;
+  color: black;
+  background: transparent;
+  border-radius: 50%;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.1s ease;
+}
+.slick-prev:hover,
+.slick-next:hover{
+  background-color: black;
+  color: whitesmoke;
+} 
+.slick-prev {
+  left: 0px;
+}
+
+.slick-next {
+  right: 0px;
+}
