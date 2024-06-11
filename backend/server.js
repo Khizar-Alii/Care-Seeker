@@ -1,6 +1,5 @@
 import app from "./app.js";
 import {v2 as cloudinary} from 'cloudinary';
-import mongoose from "mongoose";
 
 const port = process.env.PORT || 3000;
 
@@ -18,7 +17,7 @@ cloudinary.config({
   cloud_name: 'dodvkozwj', 
   api_key: '932539191499468', 
   api_secret: 'IXPecTyX_0cQRezd7v3ZJYjYfeI'
-}); 
+});
 
 app.listen(port ,() => {
   console.log(`App listening on ${port}`);

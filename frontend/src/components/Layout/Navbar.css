@@ -68,17 +68,21 @@
 
 @media screen and (max-width: 1300px) {
   .userIcon {
-        background-color: black;
-        color: #FAFAFA;
+    background-color: black;
+    color: #fafafa;
+  }
+  .dropdownContent {
+    background-color: #fafafa;
+    border: none;
+    outline: none;
+    top: 0;
+    left: 0;
+    span {
+      display: none;
     }
-    .dropdownContent {
-        background-color:#FAFAFA;
-        border: none;
-        outline: none;
-        top: 0;
-        left: 0;
-        span {
-            display: none;
-        }
-      }
+  }
+}
+
+.navbarHide {
+  display: none;
 }

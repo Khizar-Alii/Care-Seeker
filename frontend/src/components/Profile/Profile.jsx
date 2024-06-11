@@ -1,12 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Context } from "../../main";
-import ProfileForm from "./ProfileForm";
 import EmployerProfile from "./EmployerProfile";
 import JobSeekerProfile from "./JobSeekerProfile";
 
 const Profile = () => {
   const { user } = useContext(Context);
+  console.log(user);
   return (
     <div>
       {user.role === "Employer" ? (

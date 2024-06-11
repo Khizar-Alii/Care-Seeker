@@ -111,7 +111,7 @@ const RegisterEmployer = () => {
         </div>
       </div>
       <div className={styles.inputTag}>
-        <label>Company</label>
+        <label>Looking For</label>
         <div>
           <input
             type="text"

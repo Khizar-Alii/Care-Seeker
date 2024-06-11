@@ -27,13 +27,16 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
+    background-size: contain;
   }
 }
 .profileTopInnerText {
   display: flex;
   flex-direction: column;
-  padding: 10px 30px;
+  padding: 10px 10px;
+  overflow: visible;
   h3 {
+    font-size: 20px;
     padding: 10px 0;
   }
 }
@@ -42,37 +45,105 @@
   flex-direction: column;
   margin-top: 30px;
   padding-bottom: 20px;
-  border-bottom: 1px solid #d9d9d9;
+  border-bottom: 2px solid #d9d9d9;
   h1 {
-    font-size: 30px;
-    letter-spacing: 1px;
+    font-size: 16px;
+    line-height: 28px;
+    color: rgb(99, 98, 98);
+    margin-bottom: 10px;
     font-weight: 600;
   }
   p {
-    padding-top: 10px;
     font-size: 18px;
+    color: #666;
+    line-height: 1.6;
+    margin-top: 10px;
     font-weight: 400;
   }
 }
 .profileContact {
-  border-bottom: 1px solid #d9d9d9;
+  /* margin-top: 30px; */
   padding: 20px 0;
-  h1 {
-    text-align: center;
-    font-size: 50px;
-    color: rgb(70, 3, 109);
-    letter-spacing: 2px;
+  border-bottom: 2px solid #d9d9d9;
+  span {
+    display: block;
+    font-size: 14px;
+    color: #999;
+    margin-bottom: 10px;
   }
   p {
-    padding-top: 10px;
     font-size: 18px;
-    font-weight: 400;
+    color: #555;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
   }
-  span {
-    font-size: 25px;
-    font-weight: 600;
-    font-family: monospace;
-    letter-spacing: 2px;
+  p i {
+    margin-right: 10px;
+    color: #4caf50;
+  }
+}
+
+.educationSection {
+  margin-top: 30px;
+  h4 {
+    font-size: 24px;
+    color: #4caf50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #d9d9d9;
+    padding-bottom: 10px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  li h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  li p {
+    font-size: 16px;
+    color: #555;
+    padding: 10px 0;
+  }
+}
+/* Experience Section */
+.experienceSection {
+  margin-top: 30px;
+  h2 {
+    font-size: 24px;
+    color: #4caf50;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #d9d9d9;
+    padding-bottom: 10px;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+  li {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+  }
+  li h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+  }
+  li p {
+    font-size: 16px;
+    color: #555;
+    padding: 10px 0;
   }
 }
 .lookingFor {
@@ -84,104 +155,191 @@
 }
 
 /* Profile.module.css */
-/* Profile.module.css */
 
-.EditProfileBtn {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-}
-
-.EditProfileBtn button {
-  background-color: #4caf50;
+.editProBtn {
+  background: linear-gradient(135deg, #4caf50 0%, #45a049 100%);
   border: none;
-  height: 70px;
   color: white;
-  padding: 20px 30px;
+  padding: 12px 20px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  /* margin: 4px 2px; */
+  margin: 10px 2px;
   cursor: pointer;
-  border-radius: 12px;
-  transition: background-color 0.3s;
+  border-radius: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-.EditProfileBtn button:hover {
-  background-color: #45a049;
+.editProBtn:hover {
+  background: linear-gradient(135deg, #45a049 0%, #3e8e41 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* edit profile css */
-
-/* EditProfile.module.css */
-
-.modal {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  right: auto;
-  bottom: auto;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
-  width: 400px;
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-.overlay {
-  background-color: rgba(0, 0, 0, 0.75);
-}
-
 .editProfile {
-  display: flex;
-  flex-direction: column;
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .editProfile h2 {
-  margin-bottom: 20px;
   text-align: center;
+  margin-bottom: 30px;
+  font-size: 2rem;
+  color: #2d5649;
 }
 
 .editProfile label {
-  margin-bottom: 10px;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #333;
 }
 
 .editProfile input,
 .editProfile textarea {
   width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  background: #f9f9f9;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.editProfile input:focus,
+.editProfile textarea:focus {
+  border-color: #2d5649;
+  box-shadow: 0 0 5px rgba(45, 86, 73, 0.5);
+  outline: none;
+}
+
+.editProfile button {
+  padding: 12px 20px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.editProfile .submitBtn {
+  background: #2d5649;
+  color: #fff;
+}
+
+.editProfile .submitBtn:hover {
+  background: #24483c;
+  transform: scale(1.05);
+}
+
+.editProfile .btnBtn {
+  background: #ccc;
+  color: #333;
+}
+
+.editProfile .btnBtn:hover {
+  background: #b3b3b3;
+  transform: scale(1.05);
+}
+
+.editProfile .educationItem,
+.editProfile .experienceItem {
+  border: 1px solid #ddd;
+  border-radius: 5px;
   padding: 10px;
-  margin-top: 5px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
+  background: #f9f9f9;
 }
 
-.editProfile button[type="submit"],.submitBtn  {
-  background-color: #28a745;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-bottom: 10px;
+.editProfile .educationItem label,
+.editProfile .experienceItem label {
+  font-weight: normal;
+  margin-bottom: 5px;
 }
 
-.editProfile button[type="button"],.btnBtn {
-  background-color: #dc3545;
-  color: #fff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+.editProfile .error {
+  color: red;
+  margin-bottom: 20px;
+  text-align: center;
+}
+@media (max-width: 1300px) {
+  .profileContainer {
+    margin-top: 100px;
+  }
+  .editProfile {
+    margin-top: 100px;
+  }
+}
+@media (max-width: 768px) {
+  .profileContainer {
+    padding: 20px;
+  }
+  .EditProfileBtn button {
+    text-align: center;
+    font-size: 14px;
+    padding: 10px 15px;
+  }
+
+  .editProfile {
+    padding: 20px;
+  }
+
+  .editProfile h2 {
+    font-size: 1.5rem;
+  }
+
+  .editProfile label {
+    font-size: 1rem;
+  }
+
+  .editProfile input,
+  .editProfile textarea {
+    font-size: 0.9rem;
+  }
+
+  .editProfile button {
+    font-size: 0.9rem;
+  }
 }
 
-.editProfile button[type="submit"]:hover {
-  background-color: #218838;
-}
-
-.editProfile button[type="button"]:hover {
-  background-color: #c82333;
+@media screen and (max-width: 500px) {
+  .editProBtn {
+    padding: 15px 15px;
+    font-size: 14px;
+    margin: 10px 2px;
+  }
+  .profileTopInnerText i {
+    font-size: 12px;
+    padding: 10px 25px;
+    h3 {
+      font-size: 14px;
+      width: 100%;
+    }
+  }
+  .dateandTime {
+    display: none;
+  }
+  .editProBtn {
+    padding: 10px auto;
+    font-size: 10px;
+    margin: 10px 2px;
+  }
+  .profileTopInnerText i {
+    font-size: 10px;
+  }
+  .profileTopInner {
+    img {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }
