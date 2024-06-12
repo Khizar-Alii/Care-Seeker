@@ -3,6 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -61,6 +62,17 @@ const PostJob = () => {
       )
       .then((res) => {
         toast.success(res.data.message);
+        // Clear the form fields
+        setTitle("");
+        setDescription("");
+        setCategory("");
+        setCountry("");
+        setCity("");
+        setLocation("");
+        setSalaryFrom("");
+        setSalaryTo("");
+        setFixedSalary("");
+        setSalaryType("default");
       })
       .catch((err) => {
         toast.error(err.response.data.message);
@@ -90,28 +102,23 @@ const PostJob = () => {
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option value="">Select Category</option>
-                <option value="Graphics & Design">Graphics & Design</option>
-                <option value="Mobile App Development">
-                  Mobile App Development
-                </option>
-                <option value="Frontend Web Development">
-                  Frontend Web Development
-                </option>
-                <option value="MERN Stack Development">
-                  MERN STACK Development
-                </option>
-                <option value="Account & Finance">Account & Finance</option>
-                <option value="Artificial Intelligence">
-                  Artificial Intelligence
-                </option>
-                <option value="Video Animation">Video Animation</option>
-                <option value="MEAN Stack Development">
-                  MEAN STACK Development
-                </option>
-                <option value="MEVN Stack Development">
-                  MEVN STACK Development
-                </option>
-                <option value="Data Entry Operator">Data Entry Operator</option>
+                <option value="Gardener">Gardener</option>
+                <option value="Childcare">Childcare</option>
+                <option value="Eldercare">Eldercare</option>
+                <option value="Gym Trainer">Gym Trainer</option>
+                <option value="Chef">Chef</option>
+                <option value="Watchman">Watchman</option>
+                <option value="Cooker">Cooker</option>
+                <option value="Cleaner">Cleaner</option>
+                <option value="Pet Care">Pet Care</option>
+                <option value="Plumber">Plumber</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Driver">Driver</option>
+                <option value="Maid">Maid</option>
+                <option value="Tutor">Tutor</option>
+                <option value="Personal Assistant">Personal Assistant</option>
+                <option value="Nurse">Nurse</option>
+                <option value="Other">Other</option>
               </select>
             </div>
             <div className="wrapper">
@@ -132,7 +139,7 @@ const PostJob = () => {
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="Location"
+              placeholder="Current Address"
             />
             <div className="salary_wrapper">
               <select

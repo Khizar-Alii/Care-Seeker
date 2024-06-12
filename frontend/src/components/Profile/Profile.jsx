@@ -6,7 +6,6 @@ import JobSeekerProfile from "./JobSeekerProfile";
 
 const Profile = () => {
   const { user } = useContext(Context);
-  console.log(user);
   return (
     <div>
       {user.role === "Employer" ? (

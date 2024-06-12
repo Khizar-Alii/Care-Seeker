@@ -1,4 +1,4 @@
-import React, { useContext, useState,useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Modal from "react-modal";
 import { Context } from "../../main";
 import styles from "./Profile.module.css";
@@ -10,8 +10,8 @@ Modal.setAppElement("#root");
 const JobSeekerProfile = () => {
   const { user, setUser } = useContext(Context);
   const [currentTime, setCurrentTime] = useState(new Date());
-
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
@@ -49,9 +49,11 @@ const JobSeekerProfile = () => {
             <div className={styles.profileTopInnerText}>
               <h3>{name}</h3>
               <i className={styles.dateandTime}>
-              <IoLocationOutline /> {location} - {formatDate(currentTime)}
+                <IoLocationOutline /> {location} - {formatDate(currentTime)}
               </i>
-          <button className={styles.editProBtn} onClick={handleEditProfile}>Edit Profile</button>
+              <button className={styles.editProBtn} onClick={handleEditProfile}>
+                Edit Profile
+              </button>
             </div>
           </section>
         </section>
@@ -96,7 +98,7 @@ const JobSeekerProfile = () => {
               ))}
             </ul>
           ) : (
-            <p>No experience information available.</p>
+            <span>No experience information available.</span>
           )}
         </section>
       </div>

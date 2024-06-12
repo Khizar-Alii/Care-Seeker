@@ -115,7 +115,7 @@ const RegisterEmployer = () => {
         <div>
           <input
             type="text"
-            placeholder="Company Name"
+            placeholder="What services you want to connect"
             value={company}
             onChange={(e) => setCompany(e.target.value)}
           />

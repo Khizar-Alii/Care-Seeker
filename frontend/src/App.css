@@ -189,9 +189,8 @@ p {
 .jobs .container .banner .card {
   background: #fff;
   text-decoration: none;
-  width: 320px;
-  /* height: 220px; */
-  height: 250px;
+  width: 400px;
+  height: 300px;
   padding: 20px 20px;
   display: flex;
   flex-direction: column;

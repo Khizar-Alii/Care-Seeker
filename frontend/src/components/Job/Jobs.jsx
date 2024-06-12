@@ -85,7 +85,7 @@ const Jobs = () => {
               style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
             />
           </div>
-          <button onClick={handleFilter} style={{ padding: '10px 20px', marginRight: '10px', cursor: 'pointer', backgroundColor: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px' }}>Apply Filters</button>
+          <button onClick={handleFilter} style={{ padding: '10px 20px', marginRight: '10px', cursor: 'pointer', backgroundColor: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px',margin:"10px 0" }}>Apply Filters</button>
           <button onClick={clearFilters} style={{ padding: '10px 20px', cursor: 'pointer', backgroundColor: '#6c757d', color: '#fff', border: 'none', borderRadius: '5px' }}>Clear Filters</button>
         </div>
         <div className="banner">

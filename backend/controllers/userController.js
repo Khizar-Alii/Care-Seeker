@@ -7,7 +7,7 @@ import bcrypt from "bcrypt"
 export const register = catchAsyncErrors(async (req, res, next) => {
   const { name, email, phone, password, role, company, bio, des, location, education, experience } = req.body;
 
-  if (!name || !email || !phone || !password || !role || !bio || !des || !location) {
+  if (!name || !email || !phone || !password  || !role || !bio || !des || !location) {
     return next(new ErrorHandler("Please fill the complete form!", 400));
   }
 

@@ -12,7 +12,8 @@ const MyJobs = () => {
   const { isAuthorized, user } = useContext(Context);
 
   const navigateTo = useNavigate();
-  //Fetching all jobs
+
+  // Fetching all jobs
   useEffect(() => {
     const fetchJobs = async () => {
       try {
@@ -28,22 +29,22 @@ const MyJobs = () => {
     };
     fetchJobs();
   }, []);
+
   if (!isAuthorized || (user && user.role !== "Employer")) {
     navigateTo("/");
   }
 
-  //Function For Enabling Editing Mode
+  // Function For Enabling Editing Mode
   const handleEnableEdit = (jobId) => {
-    //Here We Are Giving Id in setEditingMode because We want to enable only that job whose ID has been send.
     setEditingMode(jobId);
   };
 
-  //Function For Disabling Editing Mode
+  // Function For Disabling Editing Mode
   const handleDisableEdit = () => {
     setEditingMode(null);
   };
 
-  //Function For Updating The Job
+  // Function For Updating The Job
   const handleUpdateJob = async (jobId) => {
     const updatedJob = myJobs.find((job) => job._id === jobId);
     await axios
@@ -59,7 +60,7 @@ const MyJobs = () => {
       });
   };
 
-  //Function For Deleting Job
+  // Function For Deleting Job
   const handleDeleteJob = async (jobId) => {
     await axios
       .delete(`http://localhost:3000/api/v1/job/delete/${jobId}`, {
@@ -75,7 +76,6 @@ const MyJobs = () => {
   };
 
   const handleInputChange = (jobId, field, value) => {
-    // Update the job object in the jobs state with the new value
     setMyJobs((prevJobs) =>
       prevJobs.map((job) =>
         job._id === jobId ? { ...job, [field]: value } : job
@@ -113,7 +113,6 @@ const MyJobs = () => {
                           />
                         </div>
                         <div>
-                          {" "}
                           <span>Country:</span>
                           <input
                             type="text"
@@ -162,36 +161,25 @@ const MyJobs = () => {
                               editingMode !== element._id ? true : false
                             }
                           >
-                            <option value="Graphics & Design">
-                              Graphics & Design
+                            <option value="Gardener">Gardener</option>
+                            <option value="Childcare">Childcare</option>
+                            <option value="Eldercare">Eldercare</option>
+                            <option value="Gym Trainer">Gym Trainer</option>
+                            <option value="Chef">Chef</option>
+                            <option value="Watchman">Watchman</option>
+                            <option value="Cooker">Cooker</option>
+                            <option value="Cleaner">Cleaner</option>
+                            <option value="Pet Care">Pet Care</option>
+                            <option value="Plumber">Plumber</option>
+                            <option value="Electrician">Electrician</option>
+                            <option value="Driver">Driver</option>
+                            <option value="Maid">Maid</option>
+                            <option value="Tutor">Tutor</option>
+                            <option value="Personal Assistant">
+                              Personal Assistant
                             </option>
-                            <option value="Mobile App Development">
-                              Mobile App Development
-                            </option>
-                            <option value="Frontend Web Development">
-                              Frontend Web Development
-                            </option>
-                            <option value="MERN Stack Development">
-                              MERN STACK Development
-                            </option>
-                            <option value="Account & Finance">
-                              Account & Finance
-                            </option>
-                            <option value="Artificial Intelligence">
-                              Artificial Intelligence
-                            </option>
-                            <option value="Video Animation">
-                              Video Animation
-                            </option>
-                            <option value="MEAN Stack Development">
-                              MEAN STACK Development
-                            </option>
-                            <option value="MEVN Stack Development">
-                              MEVN STACK Development
-                            </option>
-                            <option value="Data Entry Operator">
-                              Data Entry Operator
-                            </option>
+                            <option value="Nurse">Nurse</option>
+                            <option value="Other">Other</option>
                           </select>
                         </div>
                         <div>
@@ -247,7 +235,6 @@ const MyJobs = () => {
                           </span>
                         </div>
                         <div>
-                          {" "}
                           <span>Expired:</span>
                           <select
                             value={element.expired}
@@ -353,4 +340,4 @@ const MyJobs = () => {
   );
 };
 
-export default MyJobs; 
+export default MyJobs;

@@ -155,7 +155,7 @@ const EditProfile = ({ user, onClose, onSave }) => {
           {experience.map((exp, index) => (
             <div key={index} className={styles.experienceItem}>
               <label>
-                Looking For:
+                {user.role ==="Employee" ? "Looking For" : "Company"}
                 <input
                   type="text"
                   value={exp.company}

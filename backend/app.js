@@ -11,11 +11,9 @@ import jobSeekerRouter from "./routers/jobSeekerRouter.js";
 import applicationRouter from "./routers/applicationRouter.js"
 import { errorMiddleware } from "./middlewares/Error.js";
 import {dbConnection} from "./database/dbConnection.js"
-// dotenv.config({path : "./config/config.env"});
-// FRONTEND_URL = "http://localhost:5173/"
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: ['http://localhost:5173', 'http://localhost:5174'],  
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true
 }));
