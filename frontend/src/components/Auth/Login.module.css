@@ -141,7 +141,6 @@
   display: inline-block;
 }
 
-
 /* Media Queries */
 @media (max-width: 1300px) {
   .authPage .container {
@@ -225,3 +224,4 @@
     margin-top: 10px;
   }
 }
+

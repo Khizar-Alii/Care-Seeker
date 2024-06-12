@@ -44,7 +44,11 @@ const EmployerProfile = () => {
       <div className={styles.profileData}>
         <section className={styles.profileTop}>
           <section className={styles.profileTopInner}>
-            <img src="./heroS.jpg" alt="" />
+              {user?.image?.url ? (
+                <img src={user.image.url} alt="User Avatar" className="userAvatar" />
+              ) : (
+                <img src="./heroS.jpg" alt="User Avatar" className="userAvatar" />
+              )}
             <div className={styles.profileTopInnerText}>
               <h3>{name}</h3>
               <i className={styles.dateandTime}>

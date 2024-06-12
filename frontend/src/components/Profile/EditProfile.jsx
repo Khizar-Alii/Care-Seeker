@@ -10,52 +10,82 @@ const EditProfile = ({ user, onClose, onSave }) => {
   const [bio, setBio] = useState(user.bio);
   const [des, setDes] = useState(user.des);
   const [location, setLocation] = useState(user.location);
-  const [education, setEducation] = useState(user.education || []);
-  const [experience, setExperience] = useState(user.experience || []);
+  var [education, setEducation] = useState(user.education || []);
+  var [experience, setExperience] = useState(user.experience || []);
   const [error, setError] = useState(null);
+  const [image, setImage] = useState(null);
+
+  // Function to handle file input changes
+  const handleFileChange = (event) => {
+    const resume = event.target.files[0];
+    setImage(image);
+  };
 
   const handleSave = async () => {
     try {
-      const payload = {
-        name,
-        email,
-        phone,
-        bio,
-        des,
-        location,
-      };
+        const payload = {
+            name,
+            email,
+            phone,
+            bio,
+            des,
+            location,
+            company,
+            education,
+            experience,
+        };
 
-      if (user.role === "Employer") {
-        payload.company = company;
-      } else {
-        payload.education = education;
-        payload.experience = experience;
-      }
-
-      const response = await axios.put(
-        "http://localhost:3000/api/v1/user/update",
-        payload,
-        {
-          withCredentials: true,
+        const formData = new FormData();
+        for (const key in payload) {
+            if (payload.hasOwnProperty(key)) {
+                if (Array.isArray(payload[key])) {
+                    formData.append(key, JSON.stringify(payload[key]));
+                } else {
+                    formData.append(key, payload[key]);
+                }
+            }
         }
-      );
-      onSave(response.data.user);
-      onClose();
+
+        if (image) {
+            formData.append("image", image);
+        }
+
+        const response = await axios.put(
+            "http://localhost:3000/api/v1/user/update",
+            formData,
+            {
+                withCredentials: true,
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                }
+            }
+        );
+
+        onSave(response.data.user);
+        onClose();
     } catch (error) {
-      console.error("Failed to update profile", error);
-      setError(error.response?.data?.error || "Failed to update profile");
+        console.error("Failed to update profile", error);
+        setError(error.response?.data?.error || "Failed to update profile");
     }
-  };
+};
 
   const handleEducationChange = (index, key, value) => {
-    const updatedEducation = [...education];
-    updatedEducation[index][key] = value;
-    setEducation(updatedEducation);
+    setEducation((prevEducation) => {
+      const updatedEducation = [...prevEducation];
+      updatedEducation[index] = {
+        ...updatedEducation[index],
+        [key]: value
+      };
+      return updatedEducation;
+    });
   };
 
   const handleExperienceChange = (index, key, value) => {
     const updatedExperience = [...experience];
-    updatedExperience[index][key] = value;
+    updatedExperience[index] = {
+      ...updatedExperience[index],
+      [key]: value
+    };
     setExperience(updatedExperience);
   };
 
@@ -155,7 +185,7 @@ const EditProfile = ({ user, onClose, onSave }) => {
           {experience.map((exp, index) => (
             <div key={index} className={styles.experienceItem}>
               <label>
-                {user.role ==="Employee" ? "Looking For" : "Company"}
+                Company:
                 <input
                   type="text"
                   value={exp.company}
@@ -212,6 +242,14 @@ const EditProfile = ({ user, onClose, onSave }) => {
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+        />
+      </label>
+      <label>
+        Profile Picture:
+        <input
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
         />
       </label>
       <button className={styles.submitBtn} onClick={handleSave}>

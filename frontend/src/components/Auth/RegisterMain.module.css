@@ -119,3 +119,8 @@ a {
 a:hover {
   text-decoration: underline;
 }
+
+.headingDiv{
+  padding: 40px 0;
+  font-size: 16px;
+}

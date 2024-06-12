@@ -2,7 +2,6 @@ import mongoose from "mongoose";
 import validator from "validator";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -17,6 +16,8 @@ const userSchema = new mongoose.Schema({
   phone: {
     type: Number,
     required: [true, "Please enter your Phone Number!"],
+    minLength: [11, "Password must contain at least 11 characters!"],
+    maxLength: [11, "Password cannot exceed 11 characters!"],
   },
   password: {
     type: String,
@@ -37,11 +38,13 @@ const userSchema = new mongoose.Schema({
   bio: {
     type: String,
     required: [true, "Describe Yourself"],
+    minLength: [30, "Bio must contain at least 30 characters!"],
 
   },
   des: {
     type: String,
     required: [true, "Tell us about Yourself"],
+    minLength: [100, "Description must contain at least 100 characters!"],
   },
   location: {
     type: String,
@@ -49,15 +52,10 @@ const userSchema = new mongoose.Schema({
   },
   education: [
     {
-      institution: {
-        type: String
-      },
-      from: {
-        type: String
-      },
-      to: {
-        type: String
-      },
+      _id: { type: mongoose.Schema.Types.ObjectId },
+      institution: { type: String },
+      from: { type: String },
+      to: { type: String },
     },
   ],
   experience: [
@@ -76,6 +74,14 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  image: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
   createdAt: {
     type: Date,
     default: Date.now,

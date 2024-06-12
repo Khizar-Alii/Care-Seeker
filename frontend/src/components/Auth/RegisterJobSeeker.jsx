@@ -15,6 +15,7 @@ const RegisterJobSeeker = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role] = useState("Job Seeker");
   const [bio, setBio] = useState("");
   const [des, setDes] = useState("");
@@ -30,6 +31,10 @@ const RegisterJobSeeker = () => {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
     try {
       const { data } = await axios.post(
         "http://localhost:3000/api/v1/user/register",
@@ -39,6 +44,7 @@ const RegisterJobSeeker = () => {
           email,
           role,
           password,
+          confirmPassword,
           bio,
           des,
           location,
@@ -56,6 +62,7 @@ const RegisterJobSeeker = () => {
       setName("");
       setEmail("");
       setPassword("");
+      setConfirmPassword("");
       setPhone("");
       setBio("");
       setDes("");
@@ -91,7 +98,7 @@ const RegisterJobSeeker = () => {
         <div>
           <input
             type="text"
-            placeholder="Khizar ALi"
+            placeholder="Khizar Ali"
             value={name}
             onChange={(e) => setName(e.target.value)}
             htmlFor="name"
@@ -117,12 +124,20 @@ const RegisterJobSeeker = () => {
         <label>Phone Number</label>
         <div>
           <input
-            type="number"
+            type="tel"
             placeholder="03175983425"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              if (/^\d{0,11}$/.test(e.target.value)) {
+                setPhone(e.target.value);
+              }
+            }}
             name="number"
             htmlFor="number"
+            maxLength="11"
+            title="Phone number must be 11 digits"
+            className={styles.noArrows}
+            required
           />
           <FaPhoneFlip />
         </div>
@@ -136,6 +151,19 @@ const RegisterJobSeeker = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             htmlFor="password"
+          />
+          <RiLock2Fill />
+        </div>
+      </div>
+      <div className={styles.inputTag}>
+        <label>Confirm Password</label>
+        <div>
+          <input
+            type="password"
+            placeholder="Confirm Your Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            htmlFor="confirmPassword"
           />
           <RiLock2Fill />
         </div>
@@ -174,6 +202,16 @@ const RegisterJobSeeker = () => {
           />
         </div>
       </div>
+      <p
+        style={{
+          fontSize: "14px",
+          color: "#DADADA",
+          fontWeight: "bold",
+          margin: "20px 0",
+        }}
+      >
+        Enter Your Education Details
+      </p>
       {education.map((edu, index) => (
         <div key={index}>
           <div className={styles.inputTag}>
@@ -223,6 +261,16 @@ const RegisterJobSeeker = () => {
       >
         Add Education
       </button>
+      <p
+        style={{
+          fontSize: "14px",
+          color: "#DADADA",
+          fontWeight: "bold",
+          margin: "20px 0",
+        }}
+      >
+        Enter Your Experience Details
+      </p>
       {experience.map((exp, index) => (
         <div key={index}>
           <div className={styles.inputTag}>

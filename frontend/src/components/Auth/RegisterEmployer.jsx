@@ -14,6 +14,7 @@ const RegisterEmployer = () => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [role] = useState("Employer");
   const [company, setCompany] = useState("");
   const [bio, setBio] = useState("");
@@ -21,24 +22,45 @@ const RegisterEmployer = () => {
   const [location, setLocation] = useState("");
 
   const { isAuthorized, setIsAuthorized } = useContext(Context);
+  
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match!");
+      return;
+    }
+
     try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("email", email);
+      formData.append("phone", phone);
+      formData.append("password", password);
+      formData.append("confirmPassword", confirmPassword);
+      formData.append("role", role);
+      formData.append("company", company);
+      formData.append("bio", bio);
+      formData.append("des", des);
+      formData.append("location", location);
+      
+
       const { data } = await axios.post(
         "http://localhost:3000/api/v1/user/register",
-        { name, phone, email, role, password, company, bio, des, location },
+        formData,
         {
-          headers: {
-            "Content-Type": "application/json",
-          },
           withCredentials: true,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
         }
       );
+      
       toast.success(data.message);
       setName("");
       setEmail("");
       setPassword("");
+      setConfirmPassword("");
       setPhone("");
       setCompany("");
       setBio("");
@@ -65,6 +87,7 @@ const RegisterEmployer = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             htmlFor="name"
+            required
           />
           <FaPencilAlt />
         </div>
@@ -79,6 +102,7 @@ const RegisterEmployer = () => {
             onChange={(e) => setEmail(e.target.value)}
             name="email"
             htmlFor="email"
+            required
           />
           <MdOutlineMailOutline />
         </div>
@@ -87,12 +111,20 @@ const RegisterEmployer = () => {
         <label>Phone Number</label>
         <div>
           <input
-            type="number"
+            type="tel"
             placeholder="03175983425"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              if (/^\d{0,11}$/.test(e.target.value)) {
+                setPhone(e.target.value);
+              }
+            }}
             name="number"
             htmlFor="number"
+            maxLength="11"
+            title="Phone number must be 11 digits"
+            className={styles.noArrows}
+            required
           />
           <FaPhoneFlip />
         </div>
@@ -106,6 +138,21 @@ const RegisterEmployer = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             htmlFor="password"
+            required
+          />
+          <RiLock2Fill />
+        </div>
+      </div>
+      <div className={styles.inputTag}>
+        <label>Confirm Password</label>
+        <div>
+          <input
+            type="password"
+            placeholder="Confirm Your Password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            htmlFor="confirmPassword"
+            required
           />
           <RiLock2Fill />
         </div>
@@ -142,6 +189,7 @@ const RegisterEmployer = () => {
             value={bio}
             rows={5}
             onChange={(e) => setBio(e.target.value)}
+            required
           />
         </div>
       </div>
@@ -153,6 +201,7 @@ const RegisterEmployer = () => {
             value={des}
             rows={5}
             onChange={(e) => setDes(e.target.value)}
+            required
           />
         </div>
       </div>

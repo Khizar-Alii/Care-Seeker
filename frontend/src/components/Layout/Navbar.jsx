@@ -44,13 +44,16 @@ const Navbar = () => {
       setIsAuthorized(false);
       navigateTo("/login");
     } catch (error) {
-      toast.error(error.response.data.message), setIsAuthorized(true);
+      toast.error(error.response.data.message);
+      setIsAuthorized(true);
     }
   };
+
   const toggleDropdown = (e) => {
     e.preventDefault();
     setDropdownVisible(!dropdownVisible);
   };
+
   return (
     <nav className={isAuthorized ? "navbarShow" : "navbarHide"}>
       <div className="container">
@@ -93,17 +96,33 @@ const Navbar = () => {
           )}
           <li className="dropdown">
             <div className="userIcon" onClick={(e) => toggleDropdown(e)}>
-              {user?.name?.charAt(0).toUpperCase()}
+              {user?.image?.url ? (
+                <img
+                  src={user.image.url}
+                  alt="User Avatar"
+                  className="userAvatar"
+                  style={{
+                    objectFit: "cover",
+                    height: "100%",
+                  }}
+                />
+              ) : (
+                user?.name?.charAt(0).toUpperCase()
+              )}
             </div>
             <div
               className={`dropdownContent ${dropdownVisible ? "show" : ""}`}
               ref={dropdownRef}
             >
-              <button onClick={handleLogout} className="navbarDropBtns">LOGOUT</button>
+              <Link className="navbarDropBtns" to="/profile">
+                Profile
+              </Link>
               <span
                 style={{ borderTop: "1px solid black", width: "90%" }}
               ></span>
-              <Link className="navbarDropBtns" to="/profile">Profile</Link>
+              <button onClick={handleLogout} className="navbarDropBtns">
+                LOGOUT
+              </button>
             </div>
           </li>
         </ul>

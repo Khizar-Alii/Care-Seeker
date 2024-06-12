@@ -6,8 +6,6 @@ import cookieParser from "cookie-parser";
 import fileUpload from "express-fileupload";
 import userRouter from "./routers/userRouter.js"
 import jobRouter from "./routers/jobRouter.js"
-import employerRouter from "./routers/employerRouter.js"; 
-import jobSeekerRouter from "./routers/jobSeekerRouter.js"; 
 import applicationRouter from "./routers/applicationRouter.js"
 import { errorMiddleware } from "./middlewares/Error.js";
 import {dbConnection} from "./database/dbConnection.js"
@@ -34,8 +32,6 @@ app.use(fileUpload({
 app.use("/api/v1/user",userRouter)
 app.use("/api/v1/application",applicationRouter)
 app.use("/api/v1/job",jobRouter)
-app.use("/api/v1/employer", employerRouter);
-app.use("/api/v1/jobseeker", jobSeekerRouter); 
 
 
 dbConnection()

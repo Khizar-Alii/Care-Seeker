@@ -2,14 +2,62 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncError.js";
 import { User } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/Error.js";
 import { sendToken } from "../utils/jwtToken.js";
-import bcrypt from "bcrypt"
+import cloudinary from "cloudinary";
+
+// Register Controller
 
 export const register = catchAsyncErrors(async (req, res, next) => {
-  const { name, email, phone, password, role, company, bio, des, location, education, experience } = req.body;
+  const {
+    name,
+    email,
+    phone,
+    password,
+    confirmPassword,
+    role,
+    company,
+    bio,
+    des,
+    location,
+    education,
+    experience,
+  } = req.body;
 
-  if (!name || !email || !phone || !password  || !role || !bio || !des || !location) {
+  if (
+    !name ||
+    !email ||
+    !phone ||
+    !password ||
+    !confirmPassword ||
+    !bio ||
+    !des ||
+    !location
+  ) {
     return next(new ErrorHandler("Please fill the complete form!", 400));
   }
+  if (password !== confirmPassword) {
+    return next(new ErrorHandler("Passwords do not match!", 400));
+  }
+  // if (!req.files || Object.keys(req.files).length === 0) {
+  //   return next(new ErrorHandler("Profile File Required!", 400));
+  // }
+  // const { image } = req.files;
+  // const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+  // if (!allowedFormats.includes(image.mimetype)) {
+  //   return next(
+  //     new ErrorHandler("Invalid file type. Please upload a PNG file.", 400)
+  //   );
+  // }
+  // const cloudinaryResponse = await cloudinary.uploader.upload(
+  //   image.tempFilePath
+  // );
+
+  // if (!cloudinaryResponse || cloudinaryResponse.error) {
+  //   console.error(
+  //     "Cloudinary Error:",
+  //     cloudinaryResponse.error || "Unknown Cloudinary error"
+  //   );
+  //   return next(new ErrorHandler("Failed to upload image to Cloudinary", 500));
+  // }
 
   const isEmail = await User.findOne({ email });
   if (isEmail) {
@@ -28,43 +76,21 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     location,
     education,
     experience,
+    // image: {
+    //   public_id: cloudinaryResponse.public_id,
+    //   url: cloudinaryResponse.secure_url,
+    // },
   });
 
   sendToken(user, 201, res, "User Registered!");
 });
 
-// export const login = catchAsyncErrors(async (req, res, next) => {
-//   const { email, password, role } = req.body;
-
-//   if (!email || !password || !role) {
-//     return next(new ErrorHandler("Please provide email, password, and role.", 400));
-//   }
-
-//   const user = await User.findOne({ email }).select("+password");
-
-//   if (!user) {
-//     return next(new ErrorHandler("Invalid Email Or Password.", 400));
-//   }
-
-//   const isPasswordMatched = await user.comparePassword(password);
-
-//   if (!isPasswordMatched) {
-//     return next(new ErrorHandler("Invalid Email Or Password.", 400));
-//   }
-
-//   if (user.role !== role) {
-//     return next(new ErrorHandler(`User with provided email and ${role} role not found!`, 404));
-//   }
-
-//   sendToken(user, 201, res, "User Logged In!");
-// });
-
-
+// Login Controller
 
 export const login = catchAsyncErrors(async (req, res, next) => {
   const { email, password } = req.body;
 
-  if (!email || !password ) {
+  if (!email || !password) {
     return next(new ErrorHandler("Please provide email, password.", 400));
   }
 
@@ -80,12 +106,10 @@ export const login = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Invalid Email Or Password.", 400));
   }
 
-  // if (user.role !== role) {
-  //   return next(new ErrorHandler(`User with provided email and ${role} role not found!`, 404));
-  // }
-
   sendToken(user, 201, res, "User Logged In!");
 });
+
+// Logout Controller
 
 export const logout = catchAsyncErrors(async (req, res, next) => {
   res
@@ -108,75 +132,76 @@ export const getUser = catchAsyncErrors((req, res, next) => {
   });
 });
 
-// Update Profile Controller
-// export const updateProfile = catchAsyncErrors(async (req, res, next) => {
-//   const { name, email, phone, role, company, bio, des, location, education, experience } = req.body;
-
-//   // Prepare updated data excluding the password
-//   const newUserData = {
-//     name,
-//     email,
-//     phone,
-//     company,
-//     bio,
-//     des,
-//     location,
-//     education,
-//     experience,
-//   };
-
-//   // Find and update the user, exclude password from updates
-//   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
-//     new: true,
-//     runValidators: true,
-//     omitUndefined: true,
-//   });
-
-//   res.status(200).json({
-//     success: true,
-//     user,
-//   });
-// });
-
-
-
-
-
-
-
-
-
-
-
-
-
+//  Update Controller
 
 export const updateProfile = catchAsyncErrors(async (req, res, next) => {
-  const { name,  phone, company, bio, des, location, education, experience } = req.body;
+  const { name, phone, company, bio, des, location } = req.body;
+  let education = req.body.education;
+  let experience = req.body.experience;
+
+  if (education) {
+    try {
+      education = JSON.parse(education);
+    } catch (error) {
+      return next(new ErrorHandler("Invalid education format", 400));
+    }
+  }
+
+  if (experience) {
+    try {
+      experience = JSON.parse(experience);
+    } catch (error) {
+      return next(new ErrorHandler("Invalid experience format", 400));
+    }
+  }
+
+  const newUserData = {
+    name,
+    phone,
+    company,
+    bio,
+    des,
+    location,
+    education,
+    experience,
+  };
+
+  if (req.files && req.files.image) {
+    const { image } = req.files;
+    const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
+    if (!allowedFormats.includes(image.mimetype)) {
+      return next(
+        new ErrorHandler("Invalid file type. Please upload a PNG file.", 400)
+      );
+    }
+
+    const cloudinaryResponse = await cloudinary.uploader.upload(
+      image.tempFilePath
+    );
+
+    if (!cloudinaryResponse || cloudinaryResponse.error) {
+      console.error(
+        "Cloudinary Error:",
+        cloudinaryResponse.error || "Unknown Cloudinary error"
+      );
+      return next(
+        new ErrorHandler("Failed to upload image to Cloudinary", 500)
+      );
+    }
+
+    newUserData.image = {
+      public_id: cloudinaryResponse.public_id,
+      url: cloudinaryResponse.secure_url,
+    };
+  }
 
   try {
-    // Prepare updated data excluding the password
-    const newUserData = {
-      name,
-      // email,
-      phone,
-      company,
-      bio,
-      des,
-      location,
-      education,
-      experience,
-    };
-
-    // Find and update the user, exclude password from updates
     const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
       new: true,
-      // runValidators: true,
-      // omitUndefined: true,
     });
 
     if (!user) {
-      return next(new ErrorHandler('User not found', 404));
+      return next(new ErrorHandler("User not found", 404));
     }
 
     res.status(200).json({
