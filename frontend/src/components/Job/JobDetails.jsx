@@ -3,6 +3,8 @@ import { Link, useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import styles from "./JobDetails.module.css";
+
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
@@ -21,52 +23,79 @@ const JobDetails = () => {
       .catch((error) => {
         navigateTo("/notfound");
       });
-  }, []);
+  }, [id, navigateTo]);
 
-  if (!isAuthorized) {
-    navigateTo("/login");
-  }
+  useEffect(() => {
+    if (!isAuthorized) {
+      navigateTo("/login");
+    }
+  }, [isAuthorized, navigateTo]);
 
   return (
-    <section className="jobDetail page">
-      <div className="container">
+    <section className={styles.page}>
+      <div className={styles.container}>
         <h3>Job Details</h3>
-        <div className="banner">
-          <p>
-            Title: <span> {job.title}</span>
-          </p>
-          <p>
-            Category: <span>{job.category}</span>
-          </p>
-          <p>
-            Country: <span>{job.country}</span>
-          </p>
-          <p>
-            City: <span>{job.city}</span>
-          </p>
-          <p>
-            Location: <span>{job.location}</span>
-          </p>
-          <p>
-            Description: <span>{job.description}</span>
-          </p>
-          <p>
-            Job Posted On: <span>{job.jobPostedOn}</span>
-          </p>
-          <p>
-            Salary:{" "}
-            {job.fixedSalary ? (
-              <span>{job.fixedSalary}</span>
-            ) : (
-              <span>
-                {job.salaryFrom} - {job.salaryTo}
-              </span>
-            )}
-          </p>
-          {user && user.role === "Employer" ? (
-            <></>
-          ) : (
-            <Link to={`/application/${job._id}`}>Apply Now</Link>
+        <div className={styles.card}>
+          <table className={styles.jobTable}>
+            <tbody>
+              <tr>
+                <td>
+                  <strong>Title</strong>
+                </td>
+                <td>{job.title}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Category</strong>
+                </td>
+                <td>{job.category}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Country</strong>
+                </td>
+                <td>{job.country}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>City</strong>
+                </td>
+                <td>{job.city}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Location</strong>
+                </td>
+                <td>{job.location}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Description</strong>
+                </td>
+                <td colSpan="3">{job.description}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Posted On</strong>
+                </td>
+                <td>{job.jobPostedOn}</td>
+              </tr>
+              <tr>
+                <td>
+                  <strong>Salary</strong>
+                </td>
+                <td>
+                  {job.fixedSalary
+                    ? job.fixedSalary
+                    : `${job.salaryFrom} - ${job.salaryTo}`}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          {user && user.role !== "Employer" && (
+            <Link to={`/application/${job._id}`} className={styles.applyButton}>
+              Apply Now
+            </Link>
           )}
         </div>
       </div>

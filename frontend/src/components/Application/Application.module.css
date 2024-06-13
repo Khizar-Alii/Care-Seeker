@@ -1,0 +1,177 @@
+/* .application {
+  display: flex;
+  flex-direction: column;
+}
+.application .container {
+  min-width: 1500px;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 50px 20px;
+}
+.application .container form {
+  display: flex;
+  flex-direction: column;
+  width: 550px;
+  padding: 40px 20px;
+  gap: 25px;
+  margin: 0 auto;
+  margin-top: 35px;
+}
+.application .container form input {
+  border: none;
+  font-size: 20px;
+  border-bottom: 1px solid black;
+  padding: 12px 4px;
+}
+.application .container form textarea {
+  width: 100%;
+  height: 200px;
+  font-size: 20px;
+  padding: 12px 4px;
+}
+.application .container form input:focus,
+.application .container form textarea:focus {
+  outline: none;
+}
+.application .container form button {
+  background-color: #2d5649;
+  color: rgb(233, 249, 255);
+  font-size: 20px;
+  font-weight: 400;
+  border: none;
+  padding: 12px 30px;
+  text-decoration: none;
+  width: 100%;
+}
+.application .container form button:hover {
+  background-color: #184235;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+@media (max-width: 1520px) {
+  .application .container {
+    min-width: 100%;
+  }
+  .application .container form {
+    width: 100%;
+  }
+} */
+
+/* Applications component */
+
+.application {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f4f4f9;
+  padding: 20px;
+}
+
+.application .container {
+  width: 100%;
+  max-width: 600px;
+  background-color: #ffffff;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.application .container h3 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  color: #333333;
+}
+
+.application .container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.application .container form input,
+.application .container form textarea {
+  width: 100%;
+  padding: 12px 15px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fafafa;
+  transition: border-color 0.3s;
+}
+
+.application .container form input:focus,
+.application .container form textarea:focus {
+  border-color: #2d5649;
+  outline: none;
+}
+
+.application .container form textarea {
+  height: 150px;
+  resize: vertical;
+}
+
+.application .container form label {
+  text-align: start;
+  display: block;
+  font-size: 16px;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+.application .container form input[type="file"] {
+  padding: 0;
+  border: none;
+  background-color: transparent;
+}
+
+.application .container form button {
+  background-color: #2d5649;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  border: none;
+  padding: 14px 30px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+}
+
+.application .container form button:hover {
+  background-color: #184235;
+}
+
+@media screen and (max-width: 1300px) {
+    
+    .application .container{
+        margin-top: 120px ;
+    }
+}
+
+@media (max-width: 600px) {
+  .application .container {
+    padding: 20px 15px;
+  }
+
+  .application .container h3 {
+    font-size: 24px;
+  }
+
+  .application .container form {
+    gap: 15px;
+  }
+
+  .application .container form input,
+  .application .container form textarea {
+    font-size: 14px;
+  }
+
+  .application .container form button {
+    font-size: 16px;
+    padding: 12px 20px;
+  }
+}

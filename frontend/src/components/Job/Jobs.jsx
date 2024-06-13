@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../../main";
+import styles from "./Jobs.module.css";
 
 const Jobs = () => {
   const [jobs, setJobs] = useState([]);
@@ -56,13 +57,13 @@ const Jobs = () => {
   };
 
   return (
-    <section className="jobs page">
-      <div className="container">
+    <section className={styles.jobs}>
+      <div className={styles.container}>
         <h1>ALL AVAILABLE JOBS</h1>
-        <div className="filter-form" style={{ marginBottom: '20px', padding: '10px', border: '1px solid #ddd', borderRadius: '5px' }}>
-          <h2 style={{ textAlign: 'center', marginBottom: '10px' }}>Filter Jobs</h2>
-          <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="salaryFrom" style={{ display: 'block', marginBottom: '5px' }}>Salary From:</label>
+        <div className={styles.filterForm}>
+          <h2>Filter Jobs</h2>
+          <div className={styles.filterField}>
+            <label htmlFor="salaryFrom">Salary From:</label>
             <input
               type="number"
               placeholder="From"
@@ -70,11 +71,10 @@ const Jobs = () => {
               name="from"
               value={salaryFrom}
               onChange={(e) => setSalaryFrom(e.target.value)}
-              style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
             />
           </div>
-          <div style={{ marginBottom: '10px' }}>
-            <label htmlFor="city" style={{ display: 'block', marginBottom: '5px' }}>City:</label>
+          <div className={styles.filterField}>
+            <label htmlFor="city">City:</label>
             <input
               type="text"
               placeholder="City Name"
@@ -82,28 +82,28 @@ const Jobs = () => {
               name="city"
               value={city}
               onChange={(e) => setCity(e.target.value)}
-              style={{ width: '100%', padding: '8px', boxSizing: 'border-box' }}
             />
           </div>
-          <button onClick={handleFilter} style={{ padding: '10px 20px', marginRight: '10px', cursor: 'pointer', backgroundColor: '#007BFF', color: '#fff', border: 'none', borderRadius: '5px',margin:"10px 0" }}>Apply Filters</button>
-          <button onClick={clearFilters} style={{ padding: '10px 20px', cursor: 'pointer', backgroundColor: '#6c757d', color: '#fff', border: 'none', borderRadius: '5px' }}>Clear Filters</button>
+          <div className={styles.filterButtons}>
+            <button onClick={handleFilter} className={styles.applyButton}>Apply Filters</button>
+            <button onClick={clearFilters} className={styles.clearButton}>Clear Filters</button>
+          </div>
         </div>
-        <div className="banner">
+        <div className={styles.banner}>
           {filteredJobs.length > 0 ? (
             filteredJobs.map((element) => {
               return (
-                <div className="card" key={element._id}>
-                  <p>{element.title}</p>
-                  <p>{element.category}</p>
-                  <p>{element.country}</p>
-                  <p>{element.city}</p>
-                  <p>{element.fixedSalary ? `Fixed Salary: ${element.fixedSalary}` : `Salary From: ${element.salaryFrom}`}</p>
-                  <Link to={`/job/${element._id}`}>Job Details</Link>
+                <div className={styles.card} key={element._id}>
+                  <p className={styles.title}>{element.title}</p>
+                  <p className={styles.category}>{element.category}</p>
+                  <p className={styles.location}>{element.country}, {element.city}</p>
+                  <p className={styles.salary}>{element.fixedSalary ? `Fixed Salary: ${element.fixedSalary}` : `Salary From: ${element.salaryFrom}`}</p>
+                  <Link to={`/job/${element._id}`} className={styles.detailsLink}>Job Details</Link>
                 </div>
               );
             })
           ) : (
-            <p>No jobs match the criteria</p>
+            <p className={styles.noJobs}>No jobs match the criteria</p>
           )}
         </div>
       </div>

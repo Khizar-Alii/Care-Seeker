@@ -1,0 +1,202 @@
+/* MyApplications.module.css */
+/* MyApplications.module.css */
+
+.myApplications {
+  padding: 20px;
+  background-color: #f5f7fa;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333333;
+}
+
+h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+  color: #777777;
+}
+
+.jobSeekerCard,
+.employerCard {
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dadada;
+}
+
+.detail p {
+  margin: 20px 0;
+  line-height: 34px;
+  border-bottom: 1px solid #dadada;
+  padding-bottom: 10px;
+  color: #555555;
+}
+
+.detail p span {
+  font-weight: bold;
+  color: #333333;
+}
+
+.resume img {
+  width: 100%;
+  max-width: 800px;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.resume img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btnArea {
+  text-align: right;
+  margin-top: 10px;
+}
+
+.delBtn {
+  background-color: #ffffff;
+  border: 1px solid #0d172a;
+  border-radius: 1.5rem;
+  color: #0d172a;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  margin: 10px 0;
+}
+
+.delBtn:hover {
+  background-color: #0d172a;
+  color: #ffffff;
+  border-color: #0d172a;
+}
+
+@media (min-width: 768px) {
+  .delBtn {
+    font-size: 16px;
+    padding: 1rem 2rem;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.myApplications {
+  padding: 20px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.jobSeekerCard,
+.employerCard {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #dadada; 
+}
+
+.detail p {
+  margin: 50px 0;
+  line-height: 34px;
+  border-bottom: 1px solid #dadada; 
+}
+
+.detail p span {
+  font-weight: bold;
+}
+
+.resume img {
+  width: 100%;
+  max-width: 800px;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.resume img:hover {
+  transform: scale(1.05);
+}
+
+
+.delBtn {
+  background-color: #fff;
+  border: 1 solid #0d172a;
+  border-radius: 1.5rem;
+  box-sizing: border-box;
+  color: #0d172a;
+  cursor: pointer;
+  font-size: 1.1rem;
+  font-weight: 600;
+  line-height: 1;
+  padding: 1rem 1.6rem;
+  text-align: center;
+  text-decoration: none #0d172a solid;
+  text-decoration-thickness: auto;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0px 1px 2px rgba(166, 175, 195, 0.25);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  margin: 10px 0;
+}
+
+.delBtn:hover {
+  background-color: #1e293b;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .delBtn {
+    font-size: 16px;
+    padding: 1rem 2rem;
+  }
+  
+}

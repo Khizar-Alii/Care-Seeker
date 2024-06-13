@@ -3,6 +3,8 @@ import { User } from "../models/userSchema.js";
 import ErrorHandler from "../middlewares/Error.js";
 import { sendToken } from "../utils/jwtToken.js";
 import cloudinary from "cloudinary";
+import nodemailer from "nodemailer";
+import bcrypt from "bcrypt"
 
 // Register Controller
 
@@ -37,28 +39,6 @@ export const register = catchAsyncErrors(async (req, res, next) => {
   if (password !== confirmPassword) {
     return next(new ErrorHandler("Passwords do not match!", 400));
   }
-  // if (!req.files || Object.keys(req.files).length === 0) {
-  //   return next(new ErrorHandler("Profile File Required!", 400));
-  // }
-  // const { image } = req.files;
-  // const allowedFormats = ["image/png", "image/jpeg", "image/webp"];
-  // if (!allowedFormats.includes(image.mimetype)) {
-  //   return next(
-  //     new ErrorHandler("Invalid file type. Please upload a PNG file.", 400)
-  //   );
-  // }
-  // const cloudinaryResponse = await cloudinary.uploader.upload(
-  //   image.tempFilePath
-  // );
-
-  // if (!cloudinaryResponse || cloudinaryResponse.error) {
-  //   console.error(
-  //     "Cloudinary Error:",
-  //     cloudinaryResponse.error || "Unknown Cloudinary error"
-  //   );
-  //   return next(new ErrorHandler("Failed to upload image to Cloudinary", 500));
-  // }
-
   const isEmail = await User.findOne({ email });
   if (isEmail) {
     return next(new ErrorHandler("Email already registered!", 400));
@@ -76,10 +56,6 @@ export const register = catchAsyncErrors(async (req, res, next) => {
     location,
     education,
     experience,
-    // image: {
-    //   public_id: cloudinaryResponse.public_id,
-    //   url: cloudinaryResponse.secure_url,
-    // },
   });
 
   sendToken(user, 201, res, "User Registered!");
@@ -211,5 +187,73 @@ export const updateProfile = catchAsyncErrors(async (req, res, next) => {
   } catch (error) {
     console.error("Error updating profile:", error);
     next(new ErrorHandler("Error updating profile", 500));
+  }
+});
+
+const handleSendEmail = async (email, subject, text) => {
+  // Create a Nodemailer transporter
+  const transporter = nodemailer.createTransport({
+    // Configure the email service or SMTP details here
+    service: "gmail",
+    auth: {
+      user: "developer9723usman@gmail.com",
+      pass: "trgg ptmi yfsd osks",
+    },
+  });
+
+  // Compose the email message
+  const mailOptions = {
+    from: "HuPro",
+    to: email,
+    subject: subject,
+    text: text,
+  };
+
+  // Send the email
+  try {
+    await transporter.sendMail(mailOptions);
+    console.log("Verification email sent successfully");
+  } catch (error) {
+    console.error("Error sending verification email:", error);
+  }
+};
+
+// Forgot password
+
+export const forgotpassword = catchAsyncErrors(async (req, res, next) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    if (user) {
+      //generate new password
+      const digits = "123456789huprosmartapp";
+      let password = "";
+
+      // Generate 7 random digits
+      for (let i = 0; i < 8; i++) {
+        password += digits[Math.floor(Math.random() * digits.length)];
+      }
+      //send email for password reset and update
+      await handleSendEmail(
+        user.email,
+        "Password reset from HuPro",
+        `Your Email is ${user.email}
+    Password is: ${password.replace(/\s+/g, "")}`
+      );
+      const hashedPassword = await bcrypt.hash(password, 10);
+      user.password = hashedPassword;
+      await user.save();
+
+      return res
+        .status(200)
+        .json({
+          success: true,
+          message: "Password reset successfully, check your email",
+        });
+    } else {
+      return res.status(404).json({ message: "Oops! No verified user found" });
+    }
+  } catch (error) {
+    console.log(error.message);
   }
 });

@@ -19,6 +19,7 @@ import PostJob from "./components/Job/PostJob";
 import NotFound from "./components/NotFound/NotFound";
 import MyJobs from "./components/Job/MyJobs";
 import Profile from "./components/Profile/Profile";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 
 const App = () => {
   const { isAuthorized, setIsAuthorized, setUser } = useContext(Context);
@@ -49,6 +50,7 @@ const App = () => {
           <Route path="/register-employer" element={<RegisterEmployer />} />
           <Route path="/register-job-seeker" element={<RegisterJobSeeker />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/" element={<Home />} />
           <Route path="/job/getall" element={<Jobs />} />
           <Route path="/job/:id" element={<JobDetails />} />

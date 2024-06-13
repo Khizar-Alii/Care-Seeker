@@ -52,17 +52,6 @@ const Login = () => {
             <h3>Please enter your details to sign in.</h3>
           </div>
           <form>
-            {/* <div className={styles.inputTag}>
-              <label>Login As</label>
-              <div>
-                <select value={role} onChange={(e) => setRole(e.target.value)}>
-                  <option value="">Select Role</option>
-                  <option value="Employer">Employer</option>
-                  <option value="Job Seeker">Job Seeker</option>
-                </select>
-                <FaRegUser />
-              </div>
-            </div> */}
             <div className={styles.inputTag}>
               <label>Email Address</label>
               <div>
@@ -96,8 +85,7 @@ const Login = () => {
             <button type="submit" onClick={handleLogin}>
               Login
             </button>
-            {/* <Link to={"/register-employer"} className={styles.goToRegBtn}>Register as an Employer</Link>
-            <Link to={"/register-job-seeker"} className={styles.goToRegBtn}>Register as an Job Seeker</Link> */}
+            <Link to={"/forgotPassword"}>Forgot Password</Link>
             <Link to={"/register"} className={styles.goToRegBtn}>Don't have an account</Link> 
           </form>
         </div>

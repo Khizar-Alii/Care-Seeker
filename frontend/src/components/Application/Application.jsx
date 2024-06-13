@@ -3,6 +3,7 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
 import { Context } from "../../main";
+import styles from "./Application.module.css"
 const Application = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -62,8 +63,8 @@ const Application = () => {
   }
 
   return (
-    <section className="application">
-      <div className="container">
+    <section className={styles.application}>
+      <div className={styles.container}>
         <h3>Application Form</h3>
         <form onSubmit={handleApplication}>
           <input
@@ -81,8 +82,16 @@ const Application = () => {
           <input
             type="number"
             placeholder="Your Phone Number"
+            name="number"
+            htmlFor="number"
+            maxLength="11"
+            title="Phone number must be 11 digits"
             value={phone}
-            onChange={(e) => setPhone(e.target.value)}
+            onChange={(e) => {
+              if (/^\d{0,11}$/.test(e.target.value)) {
+                setPhone(e.target.value);
+              }
+            }}
           />
           <input
             type="text"

@@ -62,7 +62,6 @@ const PostJob = () => {
       )
       .then((res) => {
         toast.success(res.data.message);
-        // Clear the form fields
         setTitle("");
         setDescription("");
         setCategory("");
