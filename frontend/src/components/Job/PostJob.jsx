@@ -3,7 +3,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
-
+import styles from "./JobPost.module.css"
 const PostJob = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -85,11 +85,11 @@ const PostJob = () => {
 
   return (
     <>
-      <div className="job_post page">
-        <div className="container">
+      <div className={styles.job_post}>
+        <div className={styles.container}>
           <h3>POST NEW JOB</h3>
           <form onSubmit={handleJobPost}>
-            <div className="wrapper">
+            <div className={styles.wrapper}>
               <input
                 type="text"
                 value={title}
@@ -120,7 +120,7 @@ const PostJob = () => {
                 <option value="Other">Other</option>
               </select>
             </div>
-            <div className="wrapper">
+            <div className={styles.wrapper}>
               <input
                 type="text"
                 value={country}
@@ -140,7 +140,7 @@ const PostJob = () => {
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Current Address"
             />
-            <div className="salary_wrapper">
+            <div className={styles.salary_wrapper}>
               <select
                 value={salaryType}
                 onChange={(e) => setSalaryType(e.target.value)}
@@ -160,7 +160,7 @@ const PostJob = () => {
                     onChange={(e) => setFixedSalary(e.target.value)}
                   />
                 ) : (
-                  <div className="ranged_salary">
+                  <div className={styles.ranged_salary}>
                     <input
                       type="number"
                       placeholder="Salary From"

@@ -78,8 +78,9 @@ const MyApplications = () => {
           <h1>My Applications</h1>
           {applications.length <= 0 ? (
             <>
-              {" "}
-              <h4>No Applications Found</h4>{" "}
+              <div className={styles.noApplicationdiv}>
+                <h4 className={styles.noApplication}>No Applications Found</h4>
+              </div>
             </>
           ) : (
             applications.map((element) => {
@@ -99,7 +100,9 @@ const MyApplications = () => {
           <h1>Applications From Job Seekers</h1>
           {applications.length <= 0 ? (
             <>
-              <h4>No Applications Found</h4>
+              <div className={styles.noApplicationdiv}>
+                <h4 className={styles.noApplication}>No Applications Found</h4>
+              </div>
             </>
           ) : (
             applications.map((element) => {
@@ -139,7 +142,7 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         <p>
           <span>Address:</span> {element.address}
         </p>
-        <p>
+        <p className={styles.coverLetter}>
           <span>CoverLetter:</span> {element.coverLetter}
         </p>
       </div>
@@ -151,7 +154,10 @@ const JobSeekerCard = ({ element, deleteApplication, openModal }) => {
         />
       </div>
       <div className={styles.btnArea}>
-        <button className={styles.delBtn} onClick={() => deleteApplication(element._id)}>
+        <button
+          className={styles.delBtn}
+          onClick={() => deleteApplication(element._id)}
+        >
           Delete Application
         </button>
       </div>
@@ -175,7 +181,7 @@ const EmployerCard = ({ element, openModal }) => {
         <p>
           <span>Address:</span> {element.address}
         </p>
-        <p>
+        <p className={styles.coverLetter}>
           <span>CoverLetter:</span> {element.coverLetter}
         </p>
       </div>

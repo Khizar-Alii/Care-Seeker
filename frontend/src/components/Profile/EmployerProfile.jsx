@@ -41,7 +41,7 @@ const EmployerProfile = () => {
 
   return (
     <div className={styles.profileContainer}>
-      <div className={styles.profileData}>
+      <div className={styles.profile}>
         <section className={styles.profileTop}>
           <section className={styles.profileTopInner}>
               {user?.image?.url ? (
